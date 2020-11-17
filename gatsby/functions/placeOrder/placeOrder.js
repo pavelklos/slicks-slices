@@ -7,13 +7,13 @@ function generateOrderEmail({ order, total }) {
     <p>Please start walking over, we will have your order ready in the next 20 mins.</p>
     <ul>
       ${order
-        .map(
-          (item) => `<li>
+      .map(
+        (item) => `<li>
         <img src="${item.thumbnail}" alt="${item.name}"/>
         ${item.size} ${item.name} - ${item.price}
       </li>`
-        )
-        .join('')}
+      )
+      .join('')}
     </ul>
     <p>Your total is <strong>${total}</strong> due at pickup</p>
     <style>
@@ -42,20 +42,7 @@ function generateFakeEventBody() {
   };
 }
 
-// Create a transport for nodemailer
-// by [Ethereal Email] https://ethereal.email/
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.ethereal.email',
-//   port: 587,
-//   auth: {
-//     user: 'deon95@ethereal.email',
-//     pass: 'spUy1H3n6kTJRC1hTu',
-//   },
-// });
-// !!! PUT DATA TO FILE [.env] !!!
-// MAIL_HOST="smtp.ethereal.email"
-// MAIL_USER="deon95@ethereal.email"
-// MAIL_PASS="spUy1H3n6kTJRC1hTu"
+
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: 587,
@@ -64,21 +51,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MAIL_PASS,
   },
 });
-
-// [credentials.csv] from [Ethereal Email] https://ethereal.email/
-// Service,"Name","Username","Password","Hostname","Port","Security"
-// SMTP,"Deon Dach","deon95@ethereal.email","spUy1H3n6kTJRC1hTu","smtp.ethereal.email",587,"STARTTLS"
-// IMAP,"Deon Dach","deon95@ethereal.email","spUy1H3n6kTJRC1hTu","imap.ethereal.email",993,"TLS"
-// POP3,"Deon Dach","deon95@ethereal.email","spUy1H3n6kTJRC1hTu","pop3.ethereal.email",995,"TLS"
-
-// Test send an Email
-// transporter.sendMail({
-//   from: "Slick's Slices <slick@exmaple.com>",
-//   // to: 'pavelkloscz@gmail.com',
-//   to: 'orders@example.com',
-//   subject: 'New order!',
-//   html: `<p>Your new pizza ordrer is here!</p>`,
-// });
 
 function wait(ms = 0) {
   return new Promise((resolve, reject) => {
